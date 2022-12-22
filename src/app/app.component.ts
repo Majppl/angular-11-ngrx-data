@@ -11,8 +11,10 @@ import { Employee } from './store/employee';
 })
 export class AppComponent implements OnInit {
   name = 'Angular ' + VERSION.major;
+  isEdit = false;
   strStatus: string = '';
   frmEmp: Employee = {
+    _id: 0,
     empid: 0,
     empname: '',
     empskillset: '',
@@ -28,8 +30,27 @@ export class AppComponent implements OnInit {
   }
 
   save() {
+    if (this.isEdit) {
+      this.isEdit = false;
+      this.employeeService
+        .update(this.frmEmp)
+        .subscribe(() => (this.strStatus = 'Updated'));
+    } else {
+      this.employeeService
+        .add(this.frmEmp)
+        .subscribe(() => (this.strStatus = 'Saved'));
+    }
+  }
+  edit(empid) {
+    this.isEdit = true;
     this.employeeService
-      .add(this.frmEmp)
-      .subscribe(() => (this.strStatus = 'Saved'));
+      .getByKey(empid)
+      .subscribe((emp) => Object.assign(this.frmEmp, emp));
+  }
+  delete(empid) {
+    this.employeeService.getByKey(empid).subscribe((emp) => {
+      Object.assign(this.frmEmp, emp);
+      this.employeeService.delete(this.frmEmp);
+    });
   }
 }

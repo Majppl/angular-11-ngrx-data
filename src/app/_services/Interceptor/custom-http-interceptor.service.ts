@@ -15,9 +15,10 @@ export class CustomHttpInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // console.log("interceptor: " + req.url);
+    debugger;
     let strURL =
       'https://crudcrud.com/' +
-      req.url.replace('api/', 'api/8e0046a64e10474da9f134f82c606e65/');
+      req.url.replace('api/', 'api/25afb662857e4b58b60f3d5e737f117d/');
 
     req = req.clone({
       url: strURL,

@@ -3,7 +3,7 @@ import { EmployeeModule } from './employee/employee.module';
 import { Employee } from './store/employee';
 
 const entityMetadata: EntityMetadataMap = {
-  Employee: { selectId: (employee: Employee) => employee.empid },
+  Employee: { selectId: (employee: Employee) => employee._id },
   Skillset: {},
 };
 

@@ -2,7 +2,11 @@
 <p>Start editing to see some magic happen :)</p>
 
 <div *ngFor="let emp of allEmployees | async">
-  <h3>{{ emp.empname }}</h3>
+  <p>
+    {{ emp.empname }} <span> | </span>
+    <span (click)="edit(emp._id)"> Edit </span> <span> | </span>
+    <span (click)="delete(emp._id)"> Delete </span>
+  </p>
 </div>
 
 <div class="form-content">
